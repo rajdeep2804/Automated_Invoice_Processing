@@ -54,3 +54,12 @@ The output instance segmentations from Mask_RCNN consist of a boolean matrix S w
 First, a new binary image is created from S. Canny Edge Detection is applied on this image to extract the edges of the mask. Then, the external contours
 are detected using the extracted edges from the previous step. By calculating the external contours, any inner edge components caused by “holes“ in the segmentation mask are discarded. After this, a step towards simplifying the segmentation mask is taken by computing the convex hull of the contours. The convex hull of a shape is the smallest possible convex set that encapsulates it. This greatly simplifies the shape of the mask, making it easier to approximate it into a quadrilateral. Because the shape of the segmentation mask often is highly irregular, this step is crucial.
 Even though the mask is now simplified, it is still irregular and not in the shape of a quadrilateral. However, the use of convex hull has clarified possible straight lines in the image, which now will be utilized by applying Hough Line Transform.
+<p float="left">
+  <img src="final_out2.jpg" width="100" />
+  <img src="mask_out.jpg" width="100" /> 
+  <img src="canny_out.jpg" width="100" />
+  <img src="ConvexHull.jpg" width="100" />
+  <img src="final_out1.jpg" width="100" />
+  <img src="final_out.jpg" width="100" />
+
+</p>
