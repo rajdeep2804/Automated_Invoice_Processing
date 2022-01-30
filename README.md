@@ -19,7 +19,7 @@ anything that is not a part of the receipt. In other words, the system should be
 ### Training data annotation
 Labelme is a graphical image annotation tool which can be used for semantic segmentation, bbox detection and classification annotation, dataset is comparatively small since labeling is done manually on labelme annotation tool around 300 images were annoated. After completing the annotation labelme format is converted to coco which is a suitable format for detectron2 and pytorch framework.
 [labelme installation guide](https://medium.com/@tingyan.deng/how-to-download-labelme-for-image-segmentation-tasks-b5668ecd0f29)
-<img src="screenshot.png" width="300" height="400"> <br/>
+<img src="readme_images/screenshot.png" width="300" height="400"> <br/>
 An example of how each receipt photograph was annotated with a polygon mask using labelme.
 
 ### Pytorch
@@ -43,10 +43,12 @@ In this project, a receipt is assumed to have the shape of a convex quadrilat- e
 In a photograph of a receipt where the receipt is perfectly aligned, meaning that it has no skew, a bounding box predicted by e.g. Faster R-CNN or YOLOv3 would be sufficient to obtain the corner coordinates of the receipt. In this situ- ation, the corner coordinates of the bounding box would translate to the corner coordinates of the receipt quadrilateral. However, in a photograph where the receipt is either rotation skewed or perspective skewed, a bounding box would only give a rough estimation of the location of the receipt. It would not give any information that could be used to determine the corners of the receipt quadrilateral. To effectively determine the corners of the receipt quadrilateral, more nuanced information about the receipt location must be obtained. Because of this, Mask R-CNN was chosen as the DL approach to this problem.
 
 #### Training Mask R-CNN
-The Mask R-CNN network was trained using the open-source Detectron2 implemted on pytorch framework.
-For custom data training on Mask RCNN you can also use train.py script with couple of changes. Like train images path, train json annot path, config_file_path and number of classes.
+The Mask R-CNN network was trained on Detectron2 and pytorch framework.
+For custom training on Mask RCNN you can also be done using 'train.py' present in this repo with couple of changes in train.py file. Like config_file_path (pre-trained weights on which you want train your model), output_dir (dir to save our custom model), num_classes (define number of classes), device (machine on which you want train your model gpu or cpu), train_images_path, train_json_annot_path, test_images_path, test_json_annot_path and cfg_save_path (path where you want save your config file).
+Before initializing training you can define all the hyper-parameters in 'utils.py' in get_train_cfg function like number of workers, batch size, learning rate and number of iterations.
+
 you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)
-<img src="test_out.jpg" width="300" height="400">
+<img src="predictor_output/predictor_output1.jpg" width="300" height="400">
 
 ### The DL approach
 the central method of the DL approach is to approximate the segmentation mask of the receipt into a quadrilateral. Using the corner coordinates of the quadrilateral, the original photograph is prepro- cessed before extracting its text via OCR.
@@ -55,10 +57,10 @@ First, a new binary image is created from S. Canny Edge Detection is applied on 
 are detected using the extracted edges from the previous step. By calculating the external contours, any inner edge components caused by “holes“ in the segmentation mask are discarded. After this, a step towards simplifying the segmentation mask is taken by computing the convex hull of the contours. The convex hull of a shape is the smallest possible convex set that encapsulates it. This greatly simplifies the shape of the mask, making it easier to approximate it into a quadrilateral. Because the shape of the segmentation mask often is highly irregular, this step is crucial.
 Even though the mask is now simplified, it is still irregular and not in the shape of a quadrilateral. However, the use of convex hull has clarified possible straight lines in the image, which now will be utilized by applying Hough Line Transform.
 <p float="left">
-  <img src="final_out2.jpg" width="100" height="150"/>
-  <img src="mask_out.jpg" width="100" height="150"/>
-  <img src="ConvexHull.jpg" width="100" height="150"/>
-  <img src="final_out1.jpg" width="100" height="150"/>
-  <img src="final_out.jpg" width="100" height="150"/>
+  <img src="output6/original_image.jpg" width="100" height="150"/>
+  <img src="output6/mask_out.jpg" width="100" height="150"/>
+  <img src="output6/canny_out.jpg" width="100" height="150"/>
+  <img src="output6/ConvexHull_mask.jpg" width="100" height="150"/>
+  <img src="output6/tranformed_output.jpg" width="100" height="150"/>
 </p>
 A visualization of the DL approach. a): the original photograph. b): the Mask R-CNN segmentation. c): Canny Edge Detection. d): Convex hull. e): final conversion.
