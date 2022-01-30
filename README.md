@@ -45,7 +45,9 @@ In a photograph of a receipt where the receipt is perfectly aligned, meaning tha
 #### Training Mask R-CNN
 The Mask R-CNN network was trained on Detectron2 and pytorch framework.
 For custom training on Mask RCNN you can also be done using 'train.py' present in this repo with couple of changes in train.py file. Like config_file_path (pre-trained weights on which you want train your model), output_dir (dir to save our custom model), num_classes (define number of classes), device (machine on which you want train your model gpu or cpu), train_images_path, train_json_annot_path, test_images_path, test_json_annot_path and cfg_save_path (path where you want save your config file).
-Before initializing training you can define all the hyper-parameters in 'utils.py' in get_train_cfg function like number of workers, batch size, learning rate and number of iterations.
+Before initializing training you can define all the hyper-parameters in 'utils.py' in 'get_train_cfg' function like number of workers, batch size, learning rate and number of iterations.
+Since the dataset is small for this use case for that model was trianed for 5k iterations, learning rate was 0.0025, number of workers 2 and batch size was also 2.
+Even with limited dataset total loss was with in the acceptable range of 0.02572 after 5k iterations.  
 you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)<br/>
 <p float="left">
 <img src="predictor_output/predictor_output1.jpg" width="240" height="320"/>
