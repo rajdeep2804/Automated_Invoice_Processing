@@ -46,9 +46,8 @@ In a photograph of a receipt where the receipt is perfectly aligned, meaning tha
 The Mask R-CNN network was trained on Detectron2 and pytorch framework.
 For custom training on Mask RCNN you can also be done using 'train.py' present in this repo with couple of changes in train.py file. Like config_file_path (pre-trained weights on which you want train your model), output_dir (dir to save our custom model), num_classes (define number of classes), device (machine on which you want train your model gpu or cpu), train_images_path, train_json_annot_path, test_images_path, test_json_annot_path and cfg_save_path (path where you want save your config file).
 Before initializing training you can define all the hyper-parameters in 'utils.py' in get_train_cfg function like number of workers, batch size, learning rate and number of iterations.
-
-you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)
-<img src="predictor_output/predictor_output1.jpg" width="300" height="400">
+you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)<br/>
+<img src="predictor_output/predictor_output1.jpg">
 
 ### The DL approach
 the central method of the DL approach is to approximate the segmentation mask of the receipt into a quadrilateral. Using the corner coordinates of the quadrilateral, the original photograph is prepro- cessed before extracting its text via OCR.
@@ -57,10 +56,10 @@ First, a new binary image is created from S. Canny Edge Detection is applied on 
 are detected using the extracted edges from the previous step. By calculating the external contours, any inner edge components caused by “holes“ in the segmentation mask are discarded. After this, a step towards simplifying the segmentation mask is taken by computing the convex hull of the contours. The convex hull of a shape is the smallest possible convex set that encapsulates it. This greatly simplifies the shape of the mask, making it easier to approximate it into a quadrilateral. Because the shape of the segmentation mask often is highly irregular, this step is crucial.
 Even though the mask is now simplified, it is still irregular and not in the shape of a quadrilateral. However, the use of convex hull has clarified possible straight lines in the image, which now will be utilized by applying Hough Line Transform.
 <p float="left">
-  <img src="output6/original_image.jpg" width="100" height="150"/>
-  <img src="output6/mask_out.jpg" width="100" height="150"/>
-  <img src="output6/canny_out.jpg" width="100" height="150"/>
-  <img src="output6/ConvexHull_mask.jpg" width="100" height="150"/>
-  <img src="output6/tranformed_output.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output6/original_image.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output6/mask_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output6/canny_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output6/ConvexHull_mask.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output6/tranformed_output.jpg" width="100" height="150"/>
 </p>
 A visualization of the DL approach. a): the original photograph. b): the Mask R-CNN segmentation. c): Canny Edge Detection. d): Convex hull. e): final conversion.
