@@ -56,8 +56,7 @@ are detected using the extracted edges from the previous step. By calculating th
 Even though the mask is now simplified, it is still irregular and not in the shape of a quadrilateral. However, the use of convex hull has clarified possible straight lines in the image, which now will be utilized by applying Hough Line Transform.
 <p float="left">
   <img src="final_out2.jpg" width="100" />
-  <img src="mask_out.jpg" width="100" /> 
-  <img src="canny_out.jpg" width="100" />
+  <img src="mask_out.jpg" width="100" />
   <img src="ConvexHull.jpg" width="100" />
   <img src="final_out1.jpg" width="100" />
   <img src="final_out.jpg" width="100" />
