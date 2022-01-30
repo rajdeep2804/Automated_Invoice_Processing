@@ -48,9 +48,9 @@ For custom training on Mask RCNN you can also be done using 'train.py' present i
 Before initializing training you can define all the hyper-parameters in 'utils.py' in get_train_cfg function like number of workers, batch size, learning rate and number of iterations.
 you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)<br/>
 <p float="left">
-<img src="predictor_output/predictor_output1.jpg" width="300" height="400"/>
-<img src="predictor_output/predictor_output2.jpg" width="300" height="400"/>
-<img src="predictor_output/predictor_output3.jpg" width="300" height="400"/>
+<img src="predictor_output/predictor_output1.jpg" width="240" height="320"/>
+<img src="predictor_output/predictor_output2.jpg" width="240" height="320"/>
+<img src="predictor_output/predictor_output3.jpg" width="240" height="320"/>
 </p>
 ### The DL approach
 the central method of the DL approach is to approximate the segmentation mask of the receipt into a quadrilateral. Using the corner coordinates of the quadrilateral, the original photograph is prepro- cessed before extracting its text via OCR.
@@ -67,4 +67,22 @@ Even though the mask is now simplified, it is still irregular and not in the sha
   <img src="detectron2_output/output6/ConvexHull_mask.jpg" width="100" height="150"/>
   <img src="detectron2_output/output6/tranformed_output.jpg" width="100" height="150"/>
 </p>
-A visualization of the DL approach. a): the original photograph. b): the Mask R-CNN segmentation. c): Canny Edge Detection. d): Convex hull. e): final conversion.
+<p float="left">
+  <img src="detectron2_output/output4/original_image.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output4/mask_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output4/mask_roi.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output4/canny_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output4/ConvexHull.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output4/ConvexHull_mask.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output4/tranformed_output.jpg" width="100" height="150"/>
+</p>
+<p float="left">
+  <img src="detectron2_output/output2/original_image.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output2/mask_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output2/mask_roi.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output2/canny_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output2/ConvexHull.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output2/ConvexHull_mask.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output2/tranformed_output.jpg" width="100" height="150"/>
+</p>
+A visualization of the DL approach. a): the original photograph. b): the Mask R-CNN segmentation. c): Mask ROI. d): Canny Edge Detection. e): Convex hull edge. f): Convex hull mask. g): final conversion.
