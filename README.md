@@ -47,8 +47,10 @@ The Mask R-CNN network was trained on Detectron2 and pytorch framework.
 For custom training on Mask RCNN you can also be done using 'train.py' present in this repo with couple of changes in train.py file. Like config_file_path (pre-trained weights on which you want train your model), output_dir (dir to save our custom model), num_classes (define number of classes), device (machine on which you want train your model gpu or cpu), train_images_path, train_json_annot_path, test_images_path, test_json_annot_path and cfg_save_path (path where you want save your config file).
 Before initializing training you can define all the hyper-parameters in 'utils.py' in get_train_cfg function like number of workers, batch size, learning rate and number of iterations.
 you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)<br/>
-<img src="predictor_output/predictor_output1.jpg">
-
+<p float="left">
+<img src="predictor_output/predictor_output1.jpg" width="300" height="400"/>
+<img src="predictor_output/predictor_output1.jpg" width="300" height="400"/>
+</p>
 ### The DL approach
 the central method of the DL approach is to approximate the segmentation mask of the receipt into a quadrilateral. Using the corner coordinates of the quadrilateral, the original photograph is prepro- cessed before extracting its text via OCR.
 The output instance segmentations from Mask_RCNN consist of a boolean matrix S with the shape H × W × N, where H is the pixel height of the in- put image, W is the pixel width of the input image and N is the number of instances detected. For each object instance, each value in the 2-dimensional matrix describes whether or not the corresponding pixel in the input image be- longs to that object. More concretely, if a value in the matrix is T rue that pixel belongs to the instance object and if it is F alse it does not. Using the boolean matrix S predicted by Mask R-CNN, a variety of different CV algorithms were applied using OpenCV in order to approximate the quadrilateral.
