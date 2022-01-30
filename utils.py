@@ -1,7 +1,7 @@
 from detectron2.data import DatasetCatalog, MetadataCatalog
 from detectron2.utils.visualizer import Visualizer
-from detectron2.config import get_cfg
-from detectron2 import model_zoo
+from detectron2.config import get_cfg #to laod the config of ig model
+from detectron2 import model_zoo #to laod pre-trained weights form model zoo
 from detectron2.utils.visualizer import ColorMode
 import random
 import cv2
@@ -11,6 +11,10 @@ from PIL import Image
 from PIL import ImageOps
 import numpy as np
 from scipy.spatial import distance as dist
+
+canny_path = "canny_out.jpg"
+convexhull_path = "ConvexHull.jpg"
+opening_path = "opening.jpg"
 
 def resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
@@ -106,7 +110,7 @@ def four_point_transform(image, pts):
     # return the warped image
     return warped
 
-def plot_samples(dataset_name, n=1):
+def plot_samples(dataset_name, n=1): #check if the annotations are correct
     dataset_custom = DatasetCatalog.get(dataset_name)
     dataset_custom_metadata = MetadataCatalog.get(dataset_name)
     
@@ -134,7 +138,7 @@ def get_train_cfg(config_file_path, checkpoint_url, train_dataset_name, test_dat
     
     cfg.SOLVER.IMS_PER_BATCH = 2
     cfg.SOLVER.BASE_LR = 0.0025
-    cfg.SOLVER.MAX_ITER = 1000
+    cfg.SOLVER.MAX_ITER = 5000
     cfg.SOLVER.STEPS = []
     
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = num_classes
@@ -183,7 +187,7 @@ def on_image(image_path, predictor):
     cv2.imwrite("canny_out.jpg", edges)
     v = Visualizer(im[:,:,::-1], metadata={}, scale= 0.4, instance_mode = ColorMode.SEGMENTATION)
     v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-    cv2.imwrite("test_out.jpg", v.get_image())
+    cv2.imwrite("predictor_output.jpg", v.get_image())
     
     
 def convex_hull(canny_path):
@@ -225,8 +229,8 @@ def transformations(opening_path, image_path):
     image1 = orig1.copy()
     image = resize(image, width=500)
     image1 = resize(image1, width=500)
-    cv2.imwrite('final_out1.jpg', image)
-    cv2.imwrite('final_out2.jpg', image1)
+    cv2.imwrite('ConvexHull_mask.jpg', image)
+    cv2.imwrite('original_image.jpg', image1)
     ratio = orig.shape[1] / float(image.shape[1])
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5,), 0)
@@ -253,4 +257,14 @@ def transformations(opening_path, image_path):
             "Try debugging your edge detection and contour steps."))
             
     receipt = four_point_transform(orig1, receiptCnt.reshape(4, 2) * ratio)
-    cv2.imwrite('final_out.jpg', resize(receipt, width=500))
+    cv2.imwrite('tranformed_output.jpg', resize(receipt, width=500))
+    
+    
+    
+def on_image1(image_path, predictor):
+    im = cv2.imread(image_path)
+    outputs = predictor(im)
+    v = Visualizer(im[:,:,::-1], metadata={}, scale= 0.5, instance_mode = ColorMode.SEGMENTATION)
+    v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+    cv2.imwrite("predictor_output6.jpg", v.get_image())
+    
