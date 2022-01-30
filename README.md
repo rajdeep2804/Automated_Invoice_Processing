@@ -49,7 +49,8 @@ Before initializing training you can define all the hyper-parameters in 'utils.p
 you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)<br/>
 <p float="left">
 <img src="predictor_output/predictor_output1.jpg" width="300" height="400"/>
-<img src="predictor_output/predictor_output1.jpg" width="300" height="400"/>
+<img src="predictor_output/predictor_output2.jpg" width="300" height="400"/>
+<img src="predictor_output/predictor_output3.jpg" width="300" height="400"/>
 </p>
 ### The DL approach
 the central method of the DL approach is to approximate the segmentation mask of the receipt into a quadrilateral. Using the corner coordinates of the quadrilateral, the original photograph is prepro- cessed before extracting its text via OCR.
@@ -60,7 +61,9 @@ Even though the mask is now simplified, it is still irregular and not in the sha
 <p float="left">
   <img src="detectron2_output/output6/original_image.jpg" width="100" height="150"/>
   <img src="detectron2_output/output6/mask_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output6/mask_roi.jpg" width="100" height="150"/>
   <img src="detectron2_output/output6/canny_out.jpg" width="100" height="150"/>
+  <img src="detectron2_output/output6/ConvexHull.jpg" width="100" height="150"/>
   <img src="detectron2_output/output6/ConvexHull_mask.jpg" width="100" height="150"/>
   <img src="detectron2_output/output6/tranformed_output.jpg" width="100" height="150"/>
 </p>
