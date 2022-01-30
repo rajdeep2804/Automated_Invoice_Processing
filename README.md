@@ -20,6 +20,7 @@ anything that is not a part of the receipt. In other words, the system should be
 Labelme is a graphical image annotation tool which can be used for semantic segmentation, bbox detection and classification annotation, dataset is comparatively small since labeling is done manually on labelme annotation tool around 300 images were annoated. After completing the annotation labelme format is converted to coco which is a suitable format for detectron2 and pytorch framework.
 [labelme installation guide](https://medium.com/@tingyan.deng/how-to-download-labelme-for-image-segmentation-tasks-b5668ecd0f29)
 ![Screenshot](screenshot.png)
+<img src="screenshot.png" width="300" height="400">
 An example of how each receipt photograph was annotated with a polygon mask using labelme.
 
 ### Pytorch
