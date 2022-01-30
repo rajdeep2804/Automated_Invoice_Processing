@@ -51,7 +51,8 @@ you can also refer to this video which was helpful. [click](https://www.youtube.
 <img src="predictor_output/predictor_output1.jpg" width="240" height="320"/>
 <img src="predictor_output/predictor_output4.jpg" width="240" height="320"/>
 <img src="predictor_output/predictor_output6.jpg" width="240" height="320"/>
-</p>
+</p> <br/>
+
 ### The DL approach
 the central method of the DL approach is to approximate the segmentation mask of the receipt into a quadrilateral. Using the corner coordinates of the quadrilateral, the original photograph is prepro- cessed before extracting its text via OCR.
 The output instance segmentations from Mask_RCNN consist of a boolean matrix S with the shape H × W × N, where H is the pixel height of the in- put image, W is the pixel width of the input image and N is the number of instances detected. For each object instance, each value in the 2-dimensional matrix describes whether or not the corresponding pixel in the input image be- longs to that object. More concretely, if a value in the matrix is T rue that pixel belongs to the instance object and if it is F alse it does not. Using the boolean matrix S predicted by Mask R-CNN, a variety of different CV algorithms were applied using OpenCV in order to approximate the quadrilateral.
