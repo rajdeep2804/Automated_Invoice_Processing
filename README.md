@@ -60,5 +60,4 @@ Even though the mask is now simplified, it is still irregular and not in the sha
   <img src="ConvexHull.jpg" width="100" />
   <img src="final_out1.jpg" width="100" />
   <img src="final_out.jpg" width="100" />
-
 </p>
