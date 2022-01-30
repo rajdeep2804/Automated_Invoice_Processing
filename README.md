@@ -19,8 +19,7 @@ anything that is not a part of the receipt. In other words, the system should be
 ### Training data annotation
 Labelme is a graphical image annotation tool which can be used for semantic segmentation, bbox detection and classification annotation, dataset is comparatively small since labeling is done manually on labelme annotation tool around 300 images were annoated. After completing the annotation labelme format is converted to coco which is a suitable format for detectron2 and pytorch framework.
 [labelme installation guide](https://medium.com/@tingyan.deng/how-to-download-labelme-for-image-segmentation-tasks-b5668ecd0f29)
-![Screenshot](screenshot.png)
-<img src="screenshot.png" width="300" height="400">
+<img src="screenshot.png" width="300" height="400"> /
 An example of how each receipt photograph was annotated with a polygon mask using labelme.
 
 ### Pytorch
@@ -47,8 +46,7 @@ In a photograph of a receipt where the receipt is perfectly aligned, meaning tha
 The Mask R-CNN network was trained using the open-source Detectron2 implemted on pytorch framework.
 For custom data training on Mask RCNN you can also use train.py script with couple of changes. Like train images path, train json annot path, config_file_path and number of classes.
 you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)
-![Screenshot](test_out.jpg)
-<img src="test_out.jpg" width="100" height="100">
+<img src="test_out.jpg" width="300" height="400">
 
 ### The DL approach
 the central method of the DL approach is to approximate the segmentation mask of the receipt into a quadrilateral. Using the corner coordinates of the quadrilateral, the original photograph is prepro- cessed before extracting its text via OCR.
