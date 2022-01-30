@@ -20,6 +20,7 @@ anything that is not a part of the receipt. In other words, the system should be
 Labelme is a graphical image annotation tool which can be used for semantic segmentation, bbox detection and classification annotation, dataset is comparatively small since labeling is done manually on labelme annotation tool around 300 images were annoated. After completing the annotation labelme format is converted to coco which is a suitable format for detectron2 and pytorch framework.
 [labelme installation guide](https://medium.com/@tingyan.deng/how-to-download-labelme-for-image-segmentation-tasks-b5668ecd0f29)
 ![Screenshot](screenshot.png)
+An example of how each receipt photograph was annotated with a polygon mask using labelme.
 
 ### Pytorch
 PyTorch is an open-source machine learning library for Python which allows maximum flexibility and speed on scientific computing for deep learning. It is a replacement for NumPy to use the power of GPUs.
@@ -41,4 +42,8 @@ In this project, a receipt is assumed to have the shape of a convex quadrilat- e
 #### Choice of network
 In a photograph of a receipt where the receipt is perfectly aligned, meaning that it has no skew, a bounding box predicted by e.g. Faster R-CNN or YOLOv3 would be sufficient to obtain the corner coordinates of the receipt. In this situ- ation, the corner coordinates of the bounding box would translate to the corner coordinates of the receipt quadrilateral. However, in a photograph where the receipt is either rotation skewed or perspective skewed, a bounding box would only give a rough estimation of the location of the receipt. It would not give any information that could be used to determine the corners of the receipt quadrilateral. To effectively determine the corners of the receipt quadrilateral, more nuanced information about the receipt location must be obtained. Because of this, Mask R-CNN was chosen as the DL approach to this problem.
 
-#### 
+#### Training Mask R-CNN
+The Mask R-CNN network was trained using the open-source Detectron2 implemted on pytorch framework.
+For custom data training on Mask RCNN you can also use train.py script with couple of changes. Like train images path, train json annot path, config_file_path and number of classes.
+you can also refer to this video which was helpful. [click](https://www.youtube.com/watch?v=GoItxr16ae8)
+![Screenshot](test_out.jpg)
